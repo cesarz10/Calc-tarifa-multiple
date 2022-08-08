@@ -1,31 +1,19 @@
 import React from 'react'
-
-//                                                   intentando con clases
-// class Person {
-    
-//     constructor (name, money, friends, debt) {
-//         this.name = name
-//         this.money = money
-//         this.friends = friends
-//         this.debt = debt
-//     }
-
-
-//     increaseDebt (amount) {
-//         this.debt += amount * this.friends;
-//     }
-
-// }
-
-
-// const Juan = new Person(Juan, 100, 0, 0);
-
+import User from './logic';
 
 // haciendolo con funciones/objetos
 const Person = () => {
+    const Juan = new User ("Juan", 200, 2, 0);
+    
+    // funcion para añadir miembro del grupo 
+    const add_member = (name, balance, friends, debt) => {
+        const member = new User (name, balance, friends, debt);
+        return member;
+    }
+
   return (
-    <div>Person</div>
+    <div>{Juan.balance}</div>
   )
 }
 
-export default Person
+export default Person;
