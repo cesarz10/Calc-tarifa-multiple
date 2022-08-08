@@ -1,4 +1,5 @@
 import Person from './components/Person'
+// import Person from './components/logic'
 
 function App () {
   return (
