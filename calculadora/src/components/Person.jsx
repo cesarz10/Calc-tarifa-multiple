@@ -4,8 +4,7 @@ import User from './logic';
 
 // haciendolo con funciones/objetos
 const Person = () => {
-    ///       estado actual,  funcion para cambiar,   estado inicial
-    let [counter, setCounter] = useState(0)
+    ///  estado actual,  funcion para cambiar,   estado inicial
     const [userList, setUserList] = useState(users)
 
     // funcion para añadir miembro del grupo 
@@ -14,6 +13,8 @@ const Person = () => {
         users.push(member)
         return member
     }
+
+    console.log(userList);
 
     let newUser = { name: "", balance: null };
 
