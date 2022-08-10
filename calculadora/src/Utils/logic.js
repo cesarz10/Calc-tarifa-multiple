@@ -1,37 +1,22 @@
 class User {
     
-    constructor (name, balance, debt) {
-        this.name = name;
-        this.balance = balance;
-        this.debt = debt;
+    constructor (name, budget, debt, expenses) {
+        this.name = name; // nombre del usuario
+        this.budget = budget; // budget de la cuenta personal (planeado vs gastado/recibido)
+        this.debt = debt; // deuda es específica a otro usuario -- podria ser un objeto
+        this.expenses = expenses; // lo que se ha gastado durante el viaje/salida/etc.. 
     }
 
     //                                  funciones propias de cada usuario 
 
     // cambiar el valor de la deuda
-    changeDebt (amount) {
-        this.debt += amount;
+    expend (amount) {
+        this.expenses += amount;
     }
 
-    // si alguien paga la cuenta completa, los otros usuarios le deberán el dinero menos su parte
-    payBill (nMembers, bill) {
-        const payed = this.splitBill(nMembers, bill);
-        this.balance -= bill;
-        this.debt -= payed * (nMembers - 1); // ????
-    }
+    // payTo (user, amount) { // pagar a alguien específico
 
-
-                                        // esto no es propio de acda usuario, no va aquí
-    splitBill (nMembers, bill) {
-
-        const billShare = bill / nMembers; // even share  ----> sería bueno que alguien pueda pagar por 
-                                                       // otras personas específicas
-        
-        console.log(`Cada persona debe pagar $${billShare}`)
-        return billShare;
-    }
-
-
+    // }
 
 }
 

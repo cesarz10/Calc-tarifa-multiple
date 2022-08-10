@@ -2,19 +2,22 @@ import React, { useState } from 'react'
 import users from '../Utils/users';
 import User from '../Utils/logic';
 
+
 // haciendolo con funciones/objetos
 const Person = () => {
+
     ///  estado actual,  funcion para cambiar,   estado inicial
     const [userList, setUserList] = useState(users)
 
     // funcion para añadir miembro del grupo 
-    const add_member = (name, balance, debt) => {
-        const member = new User(name, balance, debt);
+    const add_member = (name, budget, debt, expenses) => {
+        const member = new User(name, budget, debt, expenses);
         users.push(member)
         return member
     }
 
-    let newUser = { name: "", balance: null };
+
+    let newUser = { name: "", budget: null, debt: {}, expenses: 0 };
 
     // handler para ingresar nuevo miembro al oprimir botón
     const handleNewUser = (event) => {
@@ -22,19 +25,13 @@ const Person = () => {
         const name = event.target.name; // nombre en el form
         const value = event.target.value; // valor en el form
 
-        // checkeando si el dtype de balance sí es un número
-        if (name === "balance" && isNaN(value)) {
-            console.log("necesita ser un número");
-            return
-        }
-
         newUser = { ...newUser, [name]: value } // ... -> spread operator
     }
 
     // se añade el nuevo miembro al oprimir el botón
     const handleSubmit = (event) => {
         event.preventDefault(event);
-        add_member(newUser.name, newUser.balance, newUser.debt)
+        add_member(newUser.name, newUser.budget, newUser.debt, newUser.expenses)
         nMembers = users.length;
         console.log(`${nMembers} usuarios`);
         console.log(users);
@@ -50,7 +47,7 @@ const Person = () => {
 
                 return (
                     <div key={index}>
-                        <p>{`${user.name}, ${user.balance}, ${user.debt}`}</p>
+                        <p>{`User: ${user.name}, Budget: ${user.budget}, Debt: ${user.debt}, Expenses: ${user.expenses}`}</p>
                     </div>
                 )
             })}
@@ -62,12 +59,8 @@ const Person = () => {
                     <input type="text" name='name' onChange={handleNewUser} />
                 </label>
                 <label>
-                    <p>Balance</p>
-                    <input type="text" name='balance' onChange={handleNewUser} />
-                </label>
-                <label>
-                    <p>Deuda</p>
-                    <input type="text" name='debt' onChange={handleNewUser} />
+                    <p>Budget</p>
+                    <input type="text" name='budget' onChange={handleNewUser} />
                 </label>
                 <button type='submit'>Add Member</button>
             </form>
