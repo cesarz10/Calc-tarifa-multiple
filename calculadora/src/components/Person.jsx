@@ -14,7 +14,6 @@ const Person = () => {
         return member
     }
 
-    console.log(userList);
 
     let newUser = { name: "", balance: null };
 
@@ -24,6 +23,7 @@ const Person = () => {
         const name = event.target.name; // nombre en el form
         const value = event.target.value; // usuario en el form
 
+        // checkeando si el dtype de balance sí es un número
         if (name === "balance" && isNaN(value)) {
             console.log("necesita ser un número");
             return
@@ -36,20 +36,18 @@ const Person = () => {
     const handleSubmit = (event) => {
         event.preventDefault(event)
         add_member(newUser.name, newUser.balance, newUser.debt)
-        console.log(users);
         nMembers = users.length;
         console.log(`${nMembers} usuarios`);
-
+        console.log(users);
+        setUserList([...users]);
     }
 
     // # de miembros será por default los miembros del array users
     let nMembers = users.length;
-    console.log(`${nMembers} usuarios`);
-    console.log(users);
 
     return (
         <>
-            {users.map((user, index) => { // se mapea el array de miembros y se muestran las 3 propiedades
+            {userList.map((user, index) => { // se mapea el array de miembros y se muestran las 3 propiedades
 
                 return (
                     <div key={index}>
@@ -72,7 +70,7 @@ const Person = () => {
                     <p>Deuda</p>
                     <input type="text" name='debt' onChange={handleNewUser} />
                 </label>
-                <button type='submit'>Add Member</button> 
+                <button type='submit'>Add Member</button>
             </form>
         </>
     )
