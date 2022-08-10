@@ -1,4 +1,4 @@
-import User from "../components/logic";
+import User from "./logic";
 
 const Juan = new User("Juan", 200, 0);
 const Pepito = new User("Pepito", 5000, 0);
