@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import users from '../Utils/users';
-import User from './logic';
+import User from '../Utils/logic';
 
 // haciendolo con funciones/objetos
 const Person = () => {
@@ -14,14 +14,13 @@ const Person = () => {
         return member
     }
 
-
     let newUser = { name: "", balance: null };
 
     // handler para ingresar nuevo miembro al oprimir botón
     const handleNewUser = (event) => {
 
         const name = event.target.name; // nombre en el form
-        const value = event.target.value; // usuario en el form
+        const value = event.target.value; // valor en el form
 
         // checkeando si el dtype de balance sí es un número
         if (name === "balance" && isNaN(value)) {
@@ -34,7 +33,7 @@ const Person = () => {
 
     // se añade el nuevo miembro al oprimir el botón
     const handleSubmit = (event) => {
-        event.preventDefault(event)
+        event.preventDefault(event);
         add_member(newUser.name, newUser.balance, newUser.debt)
         nMembers = users.length;
         console.log(`${nMembers} usuarios`);
