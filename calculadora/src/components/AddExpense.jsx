@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
+import users from '../Utils/users'
+
 
 const formInitialState = {
-    person: "",
-    description: "",
-    amount: ""
+    person: "", // persona a la que se le debe
+    description: "", // qué se compró
+    amount: "" // valor del gasto
 }
 
 const AddExpense = () => {
 
     const [formExpense, setFormExpense] = useState(formInitialState)
 
-    console.log("me he renderizado");
+
+    // handler del form
     const handleExpenseForm = (event) => {
         const name = event.target.name;
         const value = event.target.value;
@@ -21,9 +24,37 @@ const AddExpense = () => {
     const handleNewExpense = (event) => {
         event.preventDefault(event);
 
-        //aquí debe ir la lógica antes de limpiar el form
+        var { person, description, amount } = formExpense; // destructuring -> saca las keys del objeto        
+        const host = users.find(user => user.name === person);
+        const nMembers = users.length;
+        amount = parseFloat(amount);
+
+        host.expend(amount);
+
+        console.log(host);
+        console.log("before", users);
+        const share = splitBill(host.name, nMembers, amount, users);
+        console.log("after", users);
+
         setFormExpense(formInitialState)
     };
+
+    const splitBill = (host, nMembers, amount, users) => {
+
+        const amountShare = parseFloat((amount / nMembers).toFixed(2)); // even share  ----> sería bueno que alguien pueda pagar por 
+        // otras personas específicas
+        
+
+        for (let user of users) {
+            if (user.name !== host) {
+                user.debt += amountShare;
+            }
+        }
+
+        console.log(`Cada persona debe pagarle a ${host} $${amountShare}`)
+        return amountShare;
+    };
+
 
     return (
         <div>
