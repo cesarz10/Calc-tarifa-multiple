@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import users from '../../../Utils/users';
 import User from '../../../Utils/logic';
 
 
 // haciendolo con funciones/objetos
-const Person = () => {
+const Person = ({userList, setUserList}) => {
 
     ///  estado actual,  funcion para cambiar,   estado inicial
-    const [userList, setUserList] = useState(users);
-
     // funcion para añadir miembro del grupo 
     const add_member = (name, budget, debt, expenses) => {
         const member = new User(name, budget, debt, expenses);

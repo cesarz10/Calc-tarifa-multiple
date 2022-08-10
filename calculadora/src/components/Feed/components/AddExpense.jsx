@@ -8,7 +8,7 @@ const formInitialState = {
     amount: "" // valor del gasto
 }
 
-const AddExpense = () => {
+const AddExpense = ({ setUserList }) => {
 
     const [formExpense, setFormExpense] = useState(formInitialState)
 
@@ -31,6 +31,9 @@ const AddExpense = () => {
         host.expend(amount);
 
         splitBill(host.name, nMembers, amount, users);
+        console.log(users);
+        setUserList([...users])
+
 
         setFormExpense(formInitialState)
     };
@@ -66,7 +69,7 @@ const AddExpense = () => {
                     <p>Amount</p>
                     <input type="text" name='amount' value={formExpense.amount} onChange={handleExpenseForm} />
                 </label>
-                <button type='submit'>Add Member</button>
+                <button type='submit'>Add Expense</button>
             </form>
         </div>
     )
