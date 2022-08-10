@@ -17,27 +17,39 @@ const Person = () => {
 
     let newUser = { name: "", balance: null };
 
+    // handler para ingresar nuevo miembro al oprimir botón
     const handleNewUser = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
+
+        const name = event.target.name; // nombre en el form
+        const value = event.target.value; // usuario en el form
+
         if (name === "balance" && isNaN(value)) {
             console.log("necesita ser un número");
             return
         }
+
         newUser = { ...newUser, [name]: value } // ... -> spread operator
     }
 
+    // se añade el nuevo miembro al oprimir el botón
     const handleSubmit = (event) => {
         event.preventDefault(event)
-        add_member(newUser.name, newUser.balance, 0)
-        setUserList([...users])
+        add_member(newUser.name, newUser.balance, newUser.debt)
+        console.log(users);
+        nMembers = users.length;
+        console.log(`${nMembers} usuarios`);
+
     }
 
+    // # de miembros será por default los miembros del array users
+    let nMembers = users.length;
+    console.log(`${nMembers} usuarios`);
+    console.log(users);
 
     return (
         <>
+            {users.map((user, index) => { // se mapea el array de miembros y se muestran las 3 propiedades
 
-            {userList.map((user, index) => {
                 return (
                     <div key={index}>
                         <p>{`${user.name}, ${user.balance}, ${user.debt}`}</p>
@@ -55,7 +67,11 @@ const Person = () => {
                     <p>Balance</p>
                     <input type="text" name='balance' onChange={handleNewUser} />
                 </label>
-                <button type='submit'>Add User</button>
+                <label>
+                    <p>Deuda</p>
+                    <input type="text" name='debt' onChange={handleNewUser} />
+                </label>
+                <button type='submit'>Add Member</button> 
             </form>
         </>
     )
