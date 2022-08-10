@@ -1,22 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import users from '../Utils/users';
 import User from './logic';
 
 // haciendolo con funciones/objetos
 const Person = () => {
+    ///       estado actual,  funcion para cambiar,   estado inicial
+    let [counter, setCounter] = useState(0)
+    const [userList, setUserList] = useState(users)
 
     // funcion para añadir miembro del grupo 
     const add_member = (name, balance, debt) => {
         const member = new User(name, balance, debt);
         users.push(member)
+        return member
     }
 
     let newUser = { name: "", balance: null };
 
     // handler para ingresar nuevo miembro al oprimir botón
     const handleNewUser = (event) => {
+
         const name = event.target.name; // nombre en el form
         const value = event.target.value; // usuario en el form
+
+        if (name === "balance" && isNaN(value)) {
+            console.log("necesita ser un número");
+            return
+        }
+
         newUser = { ...newUser, [name]: value } // ... -> spread operator
     }
 
@@ -38,6 +49,7 @@ const Person = () => {
     return (
         <>
             {users.map((user, index) => { // se mapea el array de miembros y se muestran las 3 propiedades
+
                 return (
                     <div key={index}>
                         <p>{`${user.name}, ${user.balance}, ${user.debt}`}</p>
