@@ -1,21 +1,18 @@
-import React, { useState } from 'react'
-import users from '../Utils/users';
-import User from '../Utils/logic';
+import React from 'react'
+import users from '../../../Utils/users';
+import User from '../../../Utils/logic';
 
 
 // haciendolo con funciones/objetos
-const Person = () => {
+const Person = ({userList, setUserList}) => {
 
     ///  estado actual,  funcion para cambiar,   estado inicial
-    const [userList, setUserList] = useState(users)
-
     // funcion para añadir miembro del grupo 
     const add_member = (name, budget, debt, expenses) => {
         const member = new User(name, budget, debt, expenses);
         users.push(member)
         return member
-    }
-
+    };
 
     let newUser = { name: "", budget: null, debt: {}, expenses: 0 };
 
@@ -26,7 +23,7 @@ const Person = () => {
         const value = event.target.value; // valor en el form
 
         newUser = { ...newUser, [name]: value } // ... -> spread operator
-    }
+    };
 
     // se añade el nuevo miembro al oprimir el botón
     const handleSubmit = (event) => {

@@ -1,12 +1,10 @@
-import AddExpense from './components/AddExpense';
-import Person from './components/Person'
+import Feed from './components/Feed/Feed';
 // import Person from './components/logic'
 
 function App() {
   return (
     <div>
-      <Person></Person>
-      <AddExpense />
+      <Feed />
     </div>
   );
 }

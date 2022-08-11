@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import users from '../Utils/users'
+import users from '../../../Utils/users'
 
 
 const formInitialState = {
@@ -8,10 +8,9 @@ const formInitialState = {
     amount: "" // valor del gasto
 }
 
-const AddExpense = () => {
+const AddExpense = ({ setUserList }) => {
 
     const [formExpense, setFormExpense] = useState(formInitialState)
-
 
     // handler del form
     const handleExpenseForm = (event) => {
@@ -24,17 +23,17 @@ const AddExpense = () => {
     const handleNewExpense = (event) => {
         event.preventDefault(event);
 
-        var { person, description, amount } = formExpense; // destructuring -> saca las keys del objeto        
+        var { person, amount } = formExpense; // destructuring -> saca las keys del objeto        
         const host = users.find(user => user.name === person);
         const nMembers = users.length;
         amount = parseFloat(amount);
 
         host.expend(amount);
 
-        console.log(host);
-        console.log("before", users);
-        const share = splitBill(host.name, nMembers, amount, users);
-        console.log("after", users);
+        splitBill(host.name, nMembers, amount, users);
+        console.log(users);
+        setUserList([...users])
+
 
         setFormExpense(formInitialState)
     };
@@ -43,7 +42,6 @@ const AddExpense = () => {
 
         const amountShare = parseFloat((amount / nMembers).toFixed(2)); // even share  ----> sería bueno que alguien pueda pagar por 
         // otras personas específicas
-        
 
         for (let user of users) {
             if (user.name !== host) {
@@ -54,7 +52,6 @@ const AddExpense = () => {
         console.log(`Cada persona debe pagarle a ${host} $${amountShare}`)
         return amountShare;
     };
-
 
     return (
         <div>
@@ -72,7 +69,7 @@ const AddExpense = () => {
                     <p>Amount</p>
                     <input type="text" name='amount' value={formExpense.amount} onChange={handleExpenseForm} />
                 </label>
-                <button type='submit'>Add Member</button>
+                <button type='submit'>Add Expense</button>
             </form>
         </div>
     )
