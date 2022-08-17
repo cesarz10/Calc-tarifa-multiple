@@ -44,7 +44,7 @@ const Person = ({ userList, setUserList }) => {
 
                 return (
                     <div key={index}>
-                        <p>{`User: ${user.name}, Budget: ${user.budget}, Debt: ${user.debt}, Expenses: ${user.expenses}`}</p>
+                        <p>{`User: ${user.name}, Budget: ${user.budget}, Debt: ${user.debt.to} | ${user.debt.amount}, Expenses: ${user.expenses}`}</p>
                     </div>
                 )
             })}
