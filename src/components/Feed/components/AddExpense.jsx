@@ -3,7 +3,7 @@ import users from '../../../Utils/users'
 
 
 const formInitialState = {
-    person: "", // persona a la que se le debe
+    person: users[0].name, // persona a la que se le debe
     description: "", // qué se compró
     amount: "" // valor del gasto
 }
@@ -27,7 +27,8 @@ const AddExpense = ({ userList, setUserList }) => {
 
         for (let user of users) {
             if (user.name !== host) {
-                user.debt += amountShare;
+                // user.debt.amount += amountShare;
+                user.payTo(host, amount);
             }
         }
         console.log(`Cada persona debe pagarle a ${host} $${amountShare}`)
@@ -40,8 +41,8 @@ const AddExpense = ({ userList, setUserList }) => {
         var { person, amount } = formExpense; // destructuring -> saca las keys del objeto        
         const host = users.find(user => user.name === person);
         const nMembers = users.length;
+        
         amount = parseFloat(amount);
-        debugger
         host.expend(amount);
 
         splitBill(host.name, nMembers, amount, users);
