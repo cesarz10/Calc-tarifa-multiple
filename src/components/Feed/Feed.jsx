@@ -4,12 +4,12 @@ import AddExpense from './components/AddExpense'
 import Person from './components/Person'
 
 const Feed = () => {
-    const [userList, setUserList] = useState(users);
+    const [userList, setUserList] = useState(users); // renderizando lista de usuarios cuando hay cambios
 
     return (
         <div>
             <Person userList={userList} setUserList={setUserList}/>
-            <AddExpense setUserList={setUserList}/>
+            <AddExpense userList={userList} setUserList={setUserList}/>
         </div>
     )
 }
