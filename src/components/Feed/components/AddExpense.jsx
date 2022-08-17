@@ -28,10 +28,9 @@ const AddExpense = ({ userList, setUserList }) => {
         for (let user of users) {
             if (user.name !== host) {
                 // user.debt.amount += amountShare;
-                user.payTo(host, amount);
+                user.payTo(host, (amount / users.length));
             }
         }
-        console.log(`Cada persona debe pagarle a ${host} $${amountShare}`)
         return amountShare;
     };
 
@@ -46,7 +45,6 @@ const AddExpense = ({ userList, setUserList }) => {
         host.expend(amount);
 
         splitBill(host.name, nMembers, amount, users);
-        console.log(users);
         setUserList([...users])
 
         setFormExpense(formInitialState)
