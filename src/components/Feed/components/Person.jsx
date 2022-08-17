@@ -4,7 +4,7 @@ import User from '../../../Utils/logic';
 
 
 // haciendolo con funciones/objetos
-const Person = ({userList, setUserList}) => {
+const Person = ({ userList, setUserList }) => {
 
     ///  estado actual,  funcion para cambiar,   estado inicial
     // funcion para añadir miembro del grupo 
