@@ -29,22 +29,42 @@ const Person = ({ userList, setUserList }) => {
     const handleSubmit = (event) => {
         event.preventDefault(event);
         add_member(newUser.name, newUser.budget, newUser.debt, newUser.expenses)
-        nMembers = users.length;
-        console.log(`${nMembers} usuarios`);
-        console.log(users);
+        // nMembers = users.length;
         setUserList([...users]);
     }
 
+    const forOfDebt = (userDebts) => {
+        let arr = []
+
+        for (const userDebt of userDebts) { // userDebt: [usuario, amount]
+            let userObj = { name: userDebt[0], debt: userDebt[1] }
+            arr.push(userObj)
+        }
+        return arr;
+    }
+
     // # de miembros será por default los miembros del array users
-    let nMembers = users.length;
+    // let nMembers = users.length;
 
     return (
         <>
             {userList.map((user, index) => { // se mapea el array de miembros y se muestran las 3 propiedades
 
+                let tempDebt = forOfDebt(user.debt);
+                console.log(tempDebt, "!!!!!!!!!!!!!!!!");
+
                 return (
                     <div key={index}>
-                        <p>{`User: ${user.name}, Budget: ${user.budget}, Debt: ${user.debt.to} | ${user.debt.amount}, Expenses: ${user.expenses}`}</p>
+                        {/* <p>{`User: ${user.name}, Budget: ${user.budget}, Debt: ${tempDebt[0]} | $${tempDebt[1]}, Expenses: ${user.expenses}`}</p> */}
+                        <p>{`User: ${user.name}, Budget: ${user.budget}, Expenses: ${user.expenses}`}</p>
+                        {`Debt: ${tempDebt.map(x => {
+                            return (
+                            <div>
+                                {console.log(x)}
+                                <p>{x.name}</p>
+                                <p>{x.debt}</p>
+                            </div>)}
+                        )}`}
                     </div>
                 )
             })}
