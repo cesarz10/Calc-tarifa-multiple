@@ -8,7 +8,7 @@ const formInitialState = {
     amount: "" // valor del gasto
 }
 
-const AddExpense = ({ setUserList }) => {
+const AddExpense = ({ userList, setUserList }) => {
 
     const [formExpense, setFormExpense] = useState(formInitialState)
 
@@ -41,7 +41,7 @@ const AddExpense = ({ setUserList }) => {
         const host = users.find(user => user.name === person);
         const nMembers = users.length;
         amount = parseFloat(amount);
-
+        debugger
         host.expend(amount);
 
         splitBill(host.name, nMembers, amount, users);
@@ -59,7 +59,12 @@ const AddExpense = ({ setUserList }) => {
             <form onSubmit={handleNewExpense}>
                 <label>
                     <p>Person</p>
-                    <input type="text" name='person' value={formExpense.person} onChange={handleExpenseForm} />
+                    { /* <input type="text" name='person' value={formExpense.person} onChange={handleExpenseForm} /> */}
+                    <select name='person' onChange={handleExpenseForm}>
+                        {userList.map((user, index) =>  // se mapea la lista de usuarios para el dropdown
+                            <option key={index}>{user.name}</option>
+                        )}
+                    </select>
                 </label>
                 <label>
                     <p>Description</p>
@@ -69,7 +74,7 @@ const AddExpense = ({ setUserList }) => {
                     <p>Amount</p>
                     <input type="text" name='amount' value={formExpense.amount} onChange={handleExpenseForm} />
                 </label>
-                <button type='submit'>Add Expense</button>
+                <button type='submit'>Add Group Expense</button>
             </form>
         </div>
     )

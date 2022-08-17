@@ -1,6 +1,6 @@
 import React from 'react'
 import users from '../../../Utils/users';
-import User from '../../../Utils/logic';
+import User from '../../../Utils/userClass';
 
 
 // haciendolo con funciones/objetos
@@ -14,7 +14,7 @@ const Person = ({ userList, setUserList }) => {
         return member
     };
 
-    let newUser = { name: "", budget: null, debt: {}, expenses: 0 };
+    let newUser = { name: "", budget: 0, debt: 0, expenses: 0 };
 
     // handler para ingresar nuevo miembro al oprimir botón
     const handleNewUser = (event) => {
