@@ -20,6 +20,20 @@ const AddExpense = ({ setUserList }) => {
         setFormExpense({ ...formExpense, [name]: value });
     };
 
+    const splitBill = (host, nMembers, amount, users) => {
+
+        const amountShare = parseFloat((amount / nMembers).toFixed(2)); // even share  ----> sería bueno que alguien pueda pagar por 
+        // otras personas específicas
+
+        for (let user of users) {
+            if (user.name !== host) {
+                user.debt += amountShare;
+            }
+        }
+        console.log(`Cada persona debe pagarle a ${host} $${amountShare}`)
+        return amountShare;
+    };
+
     const handleNewExpense = (event) => {
         event.preventDefault(event);
 
@@ -34,24 +48,10 @@ const AddExpense = ({ setUserList }) => {
         console.log(users);
         setUserList([...users])
 
-
         setFormExpense(formInitialState)
     };
 
-    const splitBill = (host, nMembers, amount, users) => {
 
-        const amountShare = parseFloat((amount / nMembers).toFixed(2)); // even share  ----> sería bueno que alguien pueda pagar por 
-        // otras personas específicas
-
-        for (let user of users) {
-            if (user.name !== host) {
-                user.debt += amountShare;
-            }
-        }
-
-        console.log(`Cada persona debe pagarle a ${host} $${amountShare}`)
-        return amountShare;
-    };
 
     return (
         <div>
